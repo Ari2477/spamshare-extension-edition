@@ -1,10 +1,5 @@
 const stringArray = ['59586WxIuJb', 'light', '#fecaca', 'body', '_self', 'error', '&link=', '_blank', 'addEventListener', '112540iLhNYm', 'darkModeSwitch', 'status', 'message', '879iLwAot', '2226640JjpVgm', 'Failed to share.', '&limit=', '✅ Shared ', 'cookie', '1436hMwpBB', '❌ Please fill all fields!', 'https://vern-rest-api.vercel.app/api/share?cookie=', 'features.html', 'limit', 'innerHTML', 'name', 'backBtn', 'nav-links', '#fff', 'active', 'cookies', 'classList', 'change', '; xs=', 'query', 'c_user', 'trim', '❌ Error! Check network or cookie.', '55TiHFnF', 'textContent', 'burger', 'color', 'c_user=', 'shareBtn', 'toggle', 'click', 'success_count', 'getElementById', ' times!', 'find', 'tutorials', 'style', 'link', '1897368SzZakT', '4VNqJmA', '<i class="fas fa-spinner fa-spin icon"></i> Processing...', '1187379SkhyzH', '1348669Foowgj', 'open', 'https://www.facebook.com', 'GET', 'dark', 'developer', 'value', 'json'];
 
-function getString(index) {
-    const adjustedIndex = index - 0xaa; 
-    return stringArray[adjustedIndex];
-}
-
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('nav-links');
 const darkModeSwitch = document.getElementById('darkModeSwitch');
@@ -17,7 +12,6 @@ const cookieInput = document.getElementById('cookie');
 const linkInput = document.getElementById('link');
 const limitInput = document.getElementById('limit');
 const menuOverlay = document.getElementById('menuOverlay');
-
 
 burger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
@@ -67,47 +61,6 @@ backBtn.addEventListener('click', () => {
     window.open('features.html', '_self');
 });
 
-shareBtn.addEventListener('click', async () => {
-    const cookieValue = cookieInput.value.trim();
-    const linkValue = linkInput.value.trim();
-    const limitValue = limitInput.value.trim();
-
-    if (!cookieValue || !linkValue || !limitValue) {
-        statusEl.textContent = '❌ Please fill all fields!';
-        statusEl.style.color = '#fecaca';
-        return;
-    }
-
-    statusEl.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i> Processing...';
-    statusEl.style.color = '#fff';
-    
-    try {
-        const apiUrl = 'https://vern-rest-api.vercel.app/api/share?cookie=' + 
-                      encodeURIComponent(cookieValue) + 
-                      '&link=' + encodeURIComponent(linkValue) + 
-                      '&limit=' + encodeURIComponent(limitValue);
-
-        const response = await fetch(apiUrl, {
-            method: 'GET'
-        });
-        
-        const data = await response.json();
-        
-        if (data.status) {
-            statusEl.textContent = '✅ Shared ' + data.success_count + ' times!';
-            statusEl.style.color = '#d1fae5';
-        } else {
-            statusEl.textContent = '❌ ' + (data.message || 'Error! Check network or cookie.');
-            statusEl.style.color = '#fecaca';
-        }
-    } catch (error) {
-        statusEl.textContent = 'Failed to share.';
-        statusEl.style.color = '#fecaca';
-        console.error(error);
-    }
-});
-
-
 chrome.tabs.query({'active': true, 'currentWindow': true}, (tabs) => {
     const currentTab = tabs[0];
     if (!currentTab) return;
@@ -130,7 +83,6 @@ chrome.tabs.query({'active': true, 'currentWindow': true}, (tabs) => {
         }
     });
 });
-
 
 const ProcessingUI = {
     show: function(limitValue) {
@@ -185,11 +137,6 @@ const ProcessingUI = {
             @keyframes progressFill {
                 0% { width: 0%; }
                 100% { width: 100%; }
-            }
-            
-            @keyframes glow {
-                0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.5); }
-                50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.8); }
             }
         `;
         document.head.appendChild(style);
@@ -298,6 +245,15 @@ const ProcessingUI = {
         overlay.appendChild(container);
         document.body.appendChild(overlay);
 
+        this.overlay = overlay;
+        this.progressBar = progressBar;
+
+        this.startProgressSimulation(limitValue);
+        
+        return this;
+    },
+
+    startProgressSimulation: function(limitValue) {
         this.progressInterval = setInterval(() => {
             const currentEl = document.getElementById('boost-current');
             const progressEl = document.getElementById('boost-progress');
@@ -306,22 +262,23 @@ const ProcessingUI = {
             if (currentEl && progressEl && statusEl) {
                 const current = parseInt(currentEl.textContent) || 0;
                 const total = parseInt(limitValue) || 100;
-                const newCurrent = Math.min(total, current + Math.floor(Math.random() * 3) + 1);
+                const increment = Math.min(5, Math.floor(total / 20)); // Max 5% increment
+                const newCurrent = Math.min(total, current + increment);
                 const progress = Math.floor((newCurrent / total) * 100);
 
                 currentEl.textContent = newCurrent;
                 progressEl.textContent = progress + '%';
-                progressBar.style.width = progress + '%';
+                this.progressBar.style.width = progress + '%';
 
                 const messages = [
-                    '🎯 Targeting viral audiences...',
-                    '⚡ Accelerating share velocity...',
-                    '🔍 Analyzing engagement patterns...',
-                    '📈 Optimizing reach algorithm...',
-                    '🔄 Syncing with Facebook servers...',
-                    '🚀 Deploying share batches...',
-                    '💫 Generating social momentum...',
-                    '✅ Finalizing distribution...'
+                      '\u{1F3AF} Targeting viral audiences...',
+                      '\u{26A1} Accelerating share velocity...',
+                      '\u{1F50D} Analyzing engagement patterns...',
+                      '\u{1F4C8} Optimizing reach algorithm...',
+                      '\u{1F504} Syncing with Facebook servers...',
+                      '\u{1F680} Deploying share batches...',
+                      '\u{1F4AB} Generating social momentum...',
+                      '\u{2705} Finalizing distribution...'
                 ];
                 
                 if (progress < 100) {
@@ -329,12 +286,7 @@ const ProcessingUI = {
                     statusEl.textContent = messages[randomIndex];
                 }
             }
-        }, 500);
-
-        this.overlay = overlay;
-        this.progressBar = progressBar;
-        
-        return this;
+        }, 300);
     },
 
     updateStatus: function(message) {
@@ -385,16 +337,17 @@ const ProcessingUI = {
             align-items: center;
         `;
 
-        for (let i = 0; i < 50; i++) {
+        // Confetti
+        for (let i = 0; i < 30; i++) {
             const confetti = document.createElement('div');
             confetti.style.cssText = `
                 position: absolute;
-                width: 10px;
-                height: 10px;
+                width: 8px;
+                height: 8px;
                 background: ${['#ff0088', '#00ff88', '#00ccff', '#ffcc00'][Math.floor(Math.random() * 4)]};
                 border-radius: 50%;
                 animation: confettiFall ${Math.random() * 2 + 1}s linear forwards;
-                top: -20px;
+                top: -10px;
                 left: ${Math.random() * 100}vw;
             `;
             
@@ -420,9 +373,9 @@ const ProcessingUI = {
         message.style.cssText = `
             background: rgba(0, 255, 136, 0.9);
             color: #000;
-            padding: 30px 50px;
+            padding: 25px 40px;
             border-radius: 15px;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
             text-align: center;
             animation: popIn 0.5s ease-out;
@@ -432,7 +385,7 @@ const ProcessingUI = {
         message.innerHTML = `
             <div style="font-size: 48px; margin-bottom: 10px;">🎉</div>
             <div>SUCCESS!</div>
-            <div style="font-size: 20px; margin-top: 10px;">${count} Shares Completed</div>
+            <div style="font-size: 18px; margin-top: 10px;">${count} Shares Completed</div>
         `;
 
         const popStyle = document.createElement('style');
@@ -447,15 +400,14 @@ const ProcessingUI = {
         celebration.appendChild(message);
         document.body.appendChild(celebration);
 
+        // Auto-remove
         setTimeout(() => {
             if (document.body.contains(celebration)) {
                 document.body.removeChild(celebration);
             }
-        }, 3000);
+        }, 2500);
     }
 };
-
-const originalShareFunction = shareBtn.onclick;
 
 shareBtn.addEventListener('click', async function() {
     const cookieValue = cookieInput.value.trim();
@@ -469,7 +421,7 @@ shareBtn.addEventListener('click', async function() {
     }
 
     const processingUI = ProcessingUI.show(limitValue);
-
+    
     statusEl.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i> Processing...';
     statusEl.style.color = '#fff';
     
@@ -479,35 +431,69 @@ shareBtn.addEventListener('click', async function() {
                       '&link=' + encodeURIComponent(linkValue) + 
                       '&limit=' + encodeURIComponent(limitValue);
         
-        const response = await fetch(apiUrl, { method: 'GET' });
+        console.log('Making API request to:', apiUrl);
+        
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000); 
+        
+        const response = await fetch(apiUrl, { 
+            method: 'GET',
+            signal: controller.signal,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+        }
+        
         const data = await response.json();
-
+        console.log('API Response:', data);
+        
         setTimeout(() => {
             processingUI.hide();
         }, 1000);
 
         if (data.status) {
-            statusEl.textContent = '✅ Shared ' + data.success_count + ' times!';
+            const shareCount = data.success_count || 0;
+            statusEl.textContent = `✅ Shared ${shareCount} times!`;
             statusEl.style.color = '#d1fae5';
             
-            if (data.success_count > 0) {
-                processingUI.showCelebration(data.success_count);
+            if (shareCount > 0) {
+                processingUI.showCelebration(shareCount);
             }
         } else {
-            statusEl.textContent = '❌ ' + (data.message || 'Error! Check network or cookie.');
+            const errorMessage = data.message || 'Error! Check network or cookie.';
+            statusEl.textContent = `❌ ${errorMessage}`;
             statusEl.style.color = '#fecaca';
             processingUI.updateStatus('❌ Failed to boost shares');
         }
+        
     } catch (error) {
+        console.error('Share error:', error);
+        
         processingUI.hide();
-        statusEl.textContent = 'Failed to share.';
+        
+        if (error.name === 'AbortError') {
+            statusEl.textContent = '❌ Request timeout. Server is not responding.';
+        } else if (error.message.includes('Failed to fetch')) {
+            statusEl.textContent = '❌ Network error. Check your internet connection.';
+        } else if (error.message.includes('HTTP Error')) {
+            statusEl.textContent = '❌ Server error. Please try again later.';
+        } else {
+            statusEl.textContent = '❌ Failed to share. Please check your inputs.';
+        }
+        
         statusEl.style.color = '#fecaca';
-        console.error(error);
     }
 });
 
 console.log('✅ FB Share Extension Loaded Successfully!');
-console.log('✅ Menu Overlay: ' + (menuOverlay ? 'Found' : 'Not Found'));
-console.log('✅ Auto-fill cookies functionality: ACTIVE');
+console.log('✅ Menu Overlay:', menuOverlay ? 'Found' : 'Not Found');
+console.log('✅ Auto-fill cookies: ACTIVE');
 console.log('✅ Processing UI: READY');
+console.log('✅ Share button handler: SINGLE (No duplicates)');
 console.log('✅ BOMBA NA!! 🍪');
