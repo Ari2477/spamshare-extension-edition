@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-/* ====== VARIABLES ====== */
 :root {
   --neon-cyan: #00f3ff;
   --neon-magenta: #ff00ff;
@@ -27,7 +26,6 @@
   --gradient-secondary: linear-gradient(135deg, var(--neon-yellow), var(--neon-green));
 }
 
-/* ====== BASE STYLES ====== */
 * {
   margin: 0;
   padding: 0;
@@ -47,7 +45,6 @@ body {
   flex-direction: column;
 }
 
-/* ====== ANIMATED BACKGROUND ====== */
 body::before {
   content: '';
   position: fixed;
@@ -70,7 +67,6 @@ body::before {
   100% { opacity: 0.7; }
 }
 
-/* ====== GRID OVERLAY ====== */
 body::after {
   content: '';
   position: fixed;
@@ -92,7 +88,6 @@ body::after {
   100% { transform: translateY(-300px) translateX(-300px); }
 }
 
-/* ====== NAVBAR ====== */
 .navbar {
   background: linear-gradient(90deg, 
     rgba(26, 26, 46, 0.95) 0%, 
@@ -142,7 +137,6 @@ body::after {
   100% { filter: drop-shadow(0 0 15px rgba(0, 243, 255, 0.8)); }
 }
 
-/* ====== BURGER MENU ====== */
 .burger {
   font-size: 1.6rem;
   cursor: pointer;
@@ -729,8 +723,7 @@ button#shareBtn:hover i {
   </button>
   
   <p id="status"><i class="fas fa-info-circle icon"></i>Ready to boost...</p>
-  
-  <!-- Processing Indicator Section -->
+
   <div class="processing-indicator hidden" id="processingIndicator">
     <div class="processing-bar"></div>
     <div class="stats-grid">
