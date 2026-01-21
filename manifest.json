@@ -13,7 +13,7 @@
     "https://vern-rest-api.vercel.app/*"
   ],
   "action": {
-    "default_popup": "ss.html",
+    "default_popup": "features.html",
     "default_icon": "icon.png"
   },
   "icons": {
