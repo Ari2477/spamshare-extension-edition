@@ -42,17 +42,17 @@ function getString(index) {
     }
 })(getStrings, 0x1e6a9);
 
-const burger = document.getElementById('burger');
-const navLinks = document.querySelector('nav-links');
+const burger       = document.getElementById('burger');
+const navLinks     = document.getElementById('nav-links');
 const darkModeSwitch = document.getElementById('darkModeSwitch');
 const developerBtn = document.getElementById('developer');
 const tutorialsBtn = document.getElementById('tutorials');
-const backBtn = document.querySelector('backBtn');
-const shareBtn = document.querySelector('shareBtn');
-const statusEl = document.getElementById('status');
-const cookieInput = document.querySelector('cookie');
-const linkInput = document.querySelector('link');
-const limitInput = document.querySelector('limit');
+const backBtn      = document.getElementById('backBtn');
+const shareBtn     = document.getElementById('shareBtn');
+const statusEl     = document.getElementById('status');
+const cookieInput  = document.getElementById('cookie');
+const linkInput    = document.getElementById('link');
+const limitInput   = document.getElementById('limit');
 
 burger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
