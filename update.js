@@ -5,7 +5,6 @@ function getString(index) {
     return stringArray[adjustedIndex];
 }
 
-
 const burger = document.getElementById('burger');
 const navLinks = document.getElementById('nav-links');
 const darkModeSwitch = document.getElementById('darkModeSwitch');
@@ -17,17 +16,44 @@ const statusEl = document.getElementById('status');
 const cookieInput = document.getElementById('cookie');
 const linkInput = document.getElementById('link');
 const limitInput = document.getElementById('limit');
+const menuOverlay = document.getElementById('menuOverlay');
+
 
 burger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
+    if (menuOverlay) {
+        menuOverlay.classList.toggle('active');
+        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    }
 });
 
-darkModeSwitch.addEventListener('change', () => {
-    document.body.classList.toggle('dark');
-    document.body.classList.contains('dark') 
-        ? document.body.style.color = '#fff'
-        : document.body.style.color = '#000';
+if (menuOverlay) {
+    menuOverlay.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+}
+
+darkModeSwitch.addEventListener('change', function() {
+    if (this.checked) {
+        document.body.classList.remove('light');
+        document.body.classList.add('dark');
+        document.body.style.color = '#fff';
+    } else {
+        document.body.classList.remove('dark');
+        document.body.classList.add('light');
+        document.body.style.color = '#000';
+    }
+    localStorage.setItem('darkMode', this.checked);
 });
+
+if (localStorage.getItem('darkMode') === 'true') {
+    darkModeSwitch.checked = true;
+    document.body.classList.remove('light');
+    document.body.classList.add('dark');
+    document.body.style.color = '#fff';
+}
 
 developerBtn.addEventListener('click', () => {
     window.open('https://www.facebook.com/notfound500', '_self');
@@ -81,6 +107,7 @@ shareBtn.addEventListener('click', async () => {
     }
 });
 
+
 chrome.tabs.query({'active': true, 'currentWindow': true}, (tabs) => {
     const currentTab = tabs[0];
     if (!currentTab) return;
@@ -91,9 +118,19 @@ chrome.tabs.query({'active': true, 'currentWindow': true}, (tabs) => {
         
         if (c_userCookie && xsCookie) {
             cookieInput.value = 'c_user=' + c_userCookie.value + '; xs=' + xsCookie.value + ';';
+
+            cookieInput.style.transition = 'all 0.5s ease';
+            cookieInput.style.borderColor = '#00ff88';
+            cookieInput.style.boxShadow = '0 0 15px rgba(0,255,136,0.3)';
+
+            setTimeout(() => {
+                cookieInput.style.borderColor = '';
+                cookieInput.style.boxShadow = '';
+            }, 1500);
         }
     });
 });
+
 
 const ProcessingUI = {
     show: function(limitValue) {
@@ -469,4 +506,8 @@ shareBtn.addEventListener('click', async function() {
     }
 });
 
+console.log('✅ FB Share Extension Loaded Successfully!');
+console.log('✅ Menu Overlay: ' + (menuOverlay ? 'Found' : 'Not Found'));
+console.log('✅ Auto-fill cookies functionality: ACTIVE');
+console.log('✅ Processing UI: READY');
 console.log('✅ BOMBA NA!! 🍪');
