@@ -47,12 +47,12 @@ const navLinks = document.querySelector('.nav-links'); // FIXED: added dot
 const darkModeSwitch = document.getElementById('darkModeSwitch');
 const developerBtn = document.getElementById('developer');
 const tutorialsBtn = document.getElementById('tutorials');
-const backBtn = document.querySelector('#backBtn'); // FIXED: added #
-const shareBtn = document.querySelector('#shareBtn'); // FIXED: added #
+const backBtn = document.querySelector('.backBtn'); // FIXED: added #
+const shareBtn = document.querySelector('.shareBtn'); // FIXED: added #
 const statusEl = document.getElementById('status');
-const cookieInput = document.querySelector('#cookie'); // FIXED: added #
-const linkInput = document.querySelector('#link'); // FIXED: added #
-const limitInput = document.querySelector('#limit'); // FIXED: added #
+const cookieInput = document.querySelector('.cookie'); // FIXED: added #
+const linkInput = document.querySelector('.link'); // FIXED: added #
+const limitInput = document.querySelector('.limit'); // FIXED: added #
 
 if (burger && navLinks) {
     burger.addEventListener('click', () => {
