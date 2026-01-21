@@ -86,7 +86,9 @@ shareBtn.addEventListener('click', async () => {
         return;
     }
 
-    statusEl.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i> Processing...';
+    shareBtn.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i> Processing...';
+    shareBtn.disabled = true;
+    statusEl.innerHTML = '<i class="fas fa-spinner fa-spin icon"></i> Processing boost...';
     statusEl.style.color = '#fff';
 
     try {
@@ -111,6 +113,9 @@ shareBtn.addEventListener('click', async () => {
         statusEl.textContent = '❌ Error! Check network or cookie.';
         statusEl.style.color = '#fecaca';
         console.error(err);
+    } finally {
+        shareBtn.textContent = 'Share';
+        shareBtn.disabled = false;
     }
 });
 
