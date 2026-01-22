@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "FB Share Booster",
   "version": "1.3",
   "description": "Boost Facebook Shares - Unlimited Sharing Tool",
@@ -22,6 +22,7 @@
     "16": "icon.png",
     "48": "icon.png",
     "128": "icon.png"
-  }
+  },
+  
+  "content_security_policy": "script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; object-src 'self'"
 }
-
