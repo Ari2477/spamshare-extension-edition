@@ -3,18 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FB Share Mini</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>FB SHARE V2 | POWER TOOL</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root {
-  --primary: #8a2be2;
-  --secondary: #9370db;
-  --accent: #ff6b8b;
-  --light: #f8f9ff;
-  --dark: #1a1a2e;
-  --success: #00c896;
-  --warning: #ffb347;
+  --primary: #8b5cf6;
+  --secondary: #7c3aed;
+  --accent: #f59e0b;
+  --success: #10b981;
+  --danger: #ef4444;
+  --dark: #0f172a;
+  --darker: #020617;
+  --light: #f8fafc;
+  --card-bg: rgba(30, 41, 59, 0.8);
 }
 
 * {
@@ -25,55 +27,78 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color: var(--light);
   min-height: 100vh;
+  padding: 20px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 15px;
 }
 
-/* Cute Floating Header */
-.header {
-  background: white;
+/* Glassmorphism Container */
+.glass-container {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 25px;
   width: 100%;
-  max-width: 450px;
-  border-radius: 20px;
-  padding: 15px 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  max-width: 420px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 60px rgba(139, 92, 246, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+/* Compact Header */
+.compact-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  animation: float 3s ease-in-out infinite;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-.logo {
+.logo-mini {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-weight: 600;
-  color: var(--primary);
-  font-size: 1.1rem;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--light);
 }
 
-.logo i {
+.logo-mini i {
   background: linear-gradient(45deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .menu-btn {
-  background: linear-gradient(45deg, var(--primary), var(--secondary));
-  color: white;
-  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--light);
   width: 40px;
   height: 40px;
   border-radius: 12px;
@@ -81,87 +106,94 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
 }
 
 .menu-btn:hover {
+  background: rgba(139, 92, 246, 0.2);
   transform: rotate(90deg);
-  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.4);
 }
 
-/* Main Container - Cute Card */
-.container {
-  background: white;
+.theme-toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.theme-toggle input {
+  display: none;
+}
+
+.theme-icon {
   width: 100%;
-  max-width: 450px;
-  border-radius: 25px;
-  padding: 25px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-  margin-bottom: 15px;
-}
-
-.container h1 {
-  text-align: center;
-  color: var(--primary);
-  margin-bottom: 25px;
-  font-size: 1.4rem;
+  height: 100%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
 }
 
-.container h1 i {
-  color: var(--accent);
+.theme-toggle input:checked + .theme-icon {
+  background: rgba(139, 92, 246, 0.2);
+  transform: rotate(180deg);
 }
 
-/* Input Groups */
-.input-group {
-  margin-bottom: 20px;
+/* Compact Form */
+.compact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input-group-compact {
   position: relative;
 }
 
-.input-group label {
+.input-group-compact label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
-  color: var(--dark);
-  font-weight: 500;
-  font-size: 0.9rem;
 }
 
-.input-group label i {
+.input-group-compact label i {
   color: var(--primary);
-  width: 20px;
-  text-align: center;
+  width: 16px;
 }
 
-.input-group input {
+.input-compact {
   width: 100%;
-  padding: 14px 45px 14px 15px;
-  border: 2px solid #e0e0ff;
+  padding: 14px 16px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 2px solid rgba(139, 92, 246, 0.3);
   border-radius: 12px;
+  color: var(--light);
   font-family: 'Poppins', sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
-  background: #fafaff;
 }
 
-.input-group input:focus {
+.input-compact:focus {
   outline: none;
   border-color: var(--primary);
-  background: white;
-  box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
 }
 
 /* Share Button */
-.share-btn {
+.share-btn-compact {
   width: 100%;
   padding: 16px;
-  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
   border: none;
   border-radius: 14px;
   color: white;
@@ -174,238 +206,174 @@ body {
   gap: 10px;
   transition: all 0.3s ease;
   margin-top: 10px;
-  box-shadow: 0 6px 20px rgba(138, 43, 226, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
-.share-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(138, 43, 226, 0.4);
+.share-btn-compact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
 }
 
-.share-btn:active {
-  transform: translateY(-1px);
+.share-btn-compact:hover::before {
+  left: 100%;
 }
 
-.share-btn i {
-  transition: transform 0.3s ease;
+.share-btn-compact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
 }
 
-.share-btn:hover i {
-  transform: translateX(5px);
+.share-btn-compact:active {
+  transform: translateY(0);
 }
 
-/* Status */
-.status {
-  margin-top: 20px;
-  padding: 15px;
-  border-radius: 12px;
+/* Status Bar */
+.status-compact {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 0.85rem;
   text-align: center;
-  font-size: 0.9rem;
-  min-height: 55px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  min-height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f9ff;
-  border: 2px dashed #d0d0ff;
-  color: #666;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.status.success {
-  background: #e8fff8;
-  border-color: var(--success);
-  color: var(--success);
-}
-
-.status.error {
-  background: #fff0f0;
-  border-color: #ff6b6b;
-  color: #ff6b6b;
-}
-
-.status.processing {
-  background: #f0f5ff;
-  border-color: var(--primary);
-  color: var(--primary);
+.status-compact:hover {
+  background: rgba(139, 92, 246, 0.1);
 }
 
 /* Side Menu */
-.side-menu {
+.side-menu-compact {
   position: fixed;
   top: 0;
-  right: -300px;
-  width: 280px;
+  right: -280px;
+  width: 260px;
   height: 100vh;
-  background: white;
-  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
   z-index: 1000;
   transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  padding: 80px 20px 30px;
-  display: flex;
-  flex-direction: column;
+  padding: 70px 20px 30px;
+  border-left: 1px solid rgba(139, 92, 246, 0.3);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
 }
 
-.side-menu.active {
+.side-menu-compact.active {
   right: 0;
 }
 
-.menu-overlay {
+.menu-overlay-compact {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
-  backdrop-filter: blur(3px);
 }
 
-.menu-overlay.active {
+.menu-overlay-compact.active {
   opacity: 1;
   visibility: visible;
 }
 
-.menu-header {
+.menu-header-compact {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
   padding: 20px;
   color: white;
   font-weight: 600;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.menu-close {
-  position: absolute;
-  right: 20px;
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.4rem;
-  cursor: pointer;
-}
-
-.menu-item {
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--dark);
-  text-decoration: none;
-  transition: all 0.3s ease;
-  background: #f8f9ff;
-  border: none;
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.95rem;
-  cursor: pointer;
-}
-
-.menu-item:hover {
-  background: linear-gradient(45deg, var(--primary), var(--secondary));
-  color: white;
-  transform: translateX(5px);
-}
-
-.menu-item i {
-  width: 22px;
-  text-align: center;
-}
-
-/* Theme Toggle */
-.theme-toggle {
-  margin-top: auto;
-  padding: 15px;
-  background: #f8f9ff;
-  border-radius: 10px;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.toggle-label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--dark);
-  font-weight: 500;
-}
-
-.toggle-switch {
-  position: relative;
-  width: 50px;
-  height: 26px;
-}
-
-.toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.toggle-slider {
-  position: absolute;
+.close-menu {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.3rem;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #ddd;
-  border-radius: 34px;
-  transition: .4s;
-}
-
-.toggle-slider:before {
-  position: absolute;
-  content: "🌙";
-  height: 20px;
-  width: 20px;
-  left: 3px;
-  bottom: 3px;
-  background: white;
-  border-radius: 50%;
-  transition: .4s;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  border-radius: 6px;
 }
 
-input:checked + .toggle-slider {
-  background: linear-gradient(45deg, var(--primary), var(--secondary));
+.close-menu:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
-input:checked + .toggle-slider:before {
-  transform: translateX(24px);
-  content: "☀️";
+.menu-item-compact {
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--light);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  width: 100%;
 }
 
-/* Processing Monitor */
-.processing-monitor {
+.menu-item-compact:hover {
+  background: rgba(139, 92, 246, 0.2);
+  transform: translateX(5px);
+}
+
+.menu-item-compact i {
+  width: 20px;
+  text-align: center;
+  color: var(--primary);
+}
+
+/* Processing Monitor Compact */
+.monitor-compact {
   position: fixed;
   bottom: 20px;
   right: 20px;
   width: 320px;
-  background: white;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(20px);
   border-radius: 18px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-  z-index: 1001;
   padding: 20px;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  z-index: 1001;
   transform: translateX(400px);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid #f0f0ff;
 }
 
-.processing-monitor.active {
+.monitor-compact.active {
   transform: translateX(0);
 }
 
@@ -415,181 +383,151 @@ input:checked + .toggle-slider:before {
   align-items: center;
   margin-bottom: 15px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #f0f0ff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .monitor-header h3 {
+  font-size: 0.95rem;
   color: var(--primary);
-  font-size: 1rem;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.close-monitor {
+.close-monitor-btn {
   background: none;
   border: none;
-  font-size: 1.4rem;
-  color: #999;
+  color: #94a3b8;
+  font-size: 1.3rem;
   cursor: pointer;
   width: 30px;
   height: 30px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 6px;
 }
 
-.close-monitor:hover {
-  background: #f0f0ff;
+.close-monitor-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.stats-grid {
+.stats-grid-compact {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
   margin-bottom: 15px;
 }
 
-.stat-item {
-  background: #f8f9ff;
+.stat-box {
+  background: rgba(0, 0, 0, 0.2);
   padding: 12px;
   border-radius: 10px;
   text-align: center;
+  border: 1px solid rgba(139, 92, 246, 0.1);
 }
 
 .stat-label {
-  font-size: 0.75rem;
-  color: #888;
+  font-size: 0.7rem;
+  color: #94a3b8;
   margin-bottom: 5px;
 }
 
 .stat-value {
   font-weight: 600;
-  color: var(--primary);
-  font-size: 1.1rem;
+  color: var(--light);
+  font-size: 1rem;
 }
 
-.progress-container {
+.progress-compact {
   margin: 15px 0;
 }
 
-.progress-label {
+.progress-header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 0.8rem;
+  color: #cbd5e1;
 }
 
-.progress-bar {
-  height: 8px;
-  background: #f0f0ff;
-  border-radius: 4px;
+.progress-bar-compact {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(45deg, var(--primary), var(--accent));
-  border-radius: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 3px;
   width: 0%;
   transition: width 0.5s ease;
 }
 
-.log-container {
+.log-compact {
   max-height: 150px;
   overflow-y: auto;
-  background: #fafaff;
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   padding: 10px;
   margin-top: 15px;
-  border: 1px solid #f0f0ff;
+  border: 1px solid rgba(139, 92, 246, 0.1);
 }
 
-.log-entry {
-  padding: 8px 10px;
-  border-radius: 8px;
+.log-entry-compact {
+  padding: 8px;
+  border-radius: 6px;
   margin-bottom: 6px;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
   border-left: 3px solid;
+  animation: slideIn 0.3s ease;
 }
 
-.log-success {
-  background: #e8fff8;
-  border-left-color: var(--success);
-  color: var(--success);
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-.log-error {
-  background: #fff0f0;
-  border-left-color: #ff6b6b;
-  color: #ff6b6b;
-}
-
-.log-info {
-  background: #f0f5ff;
-  border-left-color: var(--primary);
-  color: var(--primary);
-}
-
-/* Dark Theme */
-body.dark {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-}
-
-body.dark .header,
-body.dark .container,
-body.dark .side-menu,
-body.dark .processing-monitor {
-  background: #2d2d44;
-  color: #e0e0ff;
-}
-
-body.dark .input-group input {
-  background: #3a3a55;
-  border-color: #4a4a6a;
-  color: #e0e0ff;
-}
-
-body.dark .status {
-  background: #3a3a55;
-  border-color: #4a4a6a;
-  color: #ccc;
-}
-
-body.dark .menu-item {
-  background: #3a3a55;
-  color: #e0e0ff;
-}
+.log-success { border-left-color: var(--success); }
+.log-error { border-left-color: var(--danger); }
+.log-info { border-left-color: var(--primary); }
+.log-warning { border-left-color: var(--accent); }
 
 /* Responsive */
 @media (max-width: 480px) {
-  .container {
-    padding: 20px;
+  body {
+    padding: 15px;
   }
   
-  .header, .container {
+  .glass-container {
+    padding: 20px;
     max-width: 100%;
   }
   
-  .processing-monitor {
+  .monitor-compact {
     width: calc(100% - 40px);
     right: 20px;
     left: 20px;
+  }
+  
+  .side-menu-compact {
+    width: 240px;
   }
 }
 
 /* Loading Animation */
 .loading {
   display: inline-flex;
-  gap: 5px;
-  margin-left: 10px;
+  gap: 4px;
+  margin-left: 8px;
 }
 
 .loading span {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   background: currentColor;
   border-radius: 50%;
   animation: bounce 1.4s infinite ease-in-out;
@@ -599,132 +537,157 @@ body.dark .menu-item {
 .loading span:nth-child(2) { animation-delay: -0.16s; }
 
 @keyframes bounce {
-  0%, 80%, 100% { transform: scale(0); }
-  40% { transform: scale(1); }
+  0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* Dark/Light Theme */
+body.light {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  color: #1e293b;
+}
+
+body.light .glass-container {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(203, 213, 225, 0.3);
+}
+
+body.light .input-compact {
+  background: rgba(241, 245, 249, 0.8);
+  border-color: rgba(139, 92, 246, 0.2);
+  color: #1e293b;
+}
+
+body.light .status-compact {
+  background: rgba(241, 245, 249, 0.8);
+  color: #475569;
+}
+
+body.light .menu-item-compact {
+  color: #1e293b;
+}
+
+.input-compact:disabled,
+.share-btn-compact:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 </style>
 </head>
-<body class="light">
+<body class="dark">
 
-<div class="header">
-  <div class="logo">
-    <i class="fas fa-share-alt"></i>
-    FB Share Mini
+<div class="glass-container">
+  <div class="compact-header">
+    <div class="logo-mini">
+      <i class="fas fa-bolt"></i>
+      FB SHARE
+    </div>
+    <div class="controls">
+      <button class="menu-btn" id="menuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <label class="theme-toggle">
+        <input type="checkbox" id="darkModeSwitch">
+        <div class="theme-icon">
+          <i class="fas fa-moon"></i>
+        </div>
+      </label>
+    </div>
   </div>
-  <button class="menu-btn" id="menuBtn">
-    <i class="fas fa-bars"></i>
-  </button>
+
+  <div class="compact-form">
+    <div class="input-group-compact">
+      <label for="cookie"><i class="fas fa-key"></i> Facebook Cookie</label>
+      <input type="text" id="cookie" class="input-compact" placeholder="c_user=...; xs=...">
+    </div>
+    
+    <div class="input-group-compact">
+      <label for="link"><i class="fas fa-link"></i> Post Link</label>
+      <input type="url" id="link" class="input-compact" placeholder="https://facebook.com/...">
+    </div>
+    
+    <div class="input-group-compact">
+      <label for="limit"><i class="fas fa-fire"></i> Share Count</label>
+      <input type="number" id="limit" class="input-compact" placeholder="10" min="1">
+    </div>
+    
+    <button class="share-btn-compact" id="shareBtn">
+      <i class="fas fa-rocket"></i>
+      START SHARING
+    </button>
+  </div>
+  
+  <div class="status-compact" id="status">
+    Ready to share! 🚀
+  </div>
 </div>
 
-<div class="container">
-  <h1><i class="fas fa-rocket"></i> Quick Share</h1>
-  
-  <div class="input-group">
-    <label for="cookie"><i class="fas fa-cookie-bite"></i> Facebook Cookie</label>
-    <input type="text" id="cookie" placeholder="c_user=...; xs=...">
-  </div>
-  
-  <div class="input-group">
-    <label for="link"><i class="fas fa-link"></i> Post Link</label>
-    <input type="url" id="link" placeholder="https://facebook.com/...">
-  </div>
-  
-  <div class="input-group">
-    <label for="limit"><i class="fas fa-hashtag"></i> Share Count</label>
-    <input type="number" id="limit" placeholder="10" min="1">
-  </div>
-  
-  <button class="share-btn" id="shareBtn">
-    <i class="fas fa-paper-plane"></i>
-    Start Sharing
-  </button>
-  
-  <div class="status" id="status">
-    Ready to share! ✨
-  </div>
-</div>
-
-<!-- Side Menu -->
-<div class="menu-overlay" id="menuOverlay"></div>
-<div class="side-menu" id="sideMenu">
-  <div class="menu-header">
-    <i class="fas fa-cog"></i>
-    Settings
-    <button class="menu-close" id="closeMenu">
+<div class="menu-overlay-compact" id="menuOverlay"></div>
+<div class="side-menu-compact" id="nav-links">
+  <div class="menu-header-compact">
+    <span>QUICK MENU</span>
+    <button class="close-menu" id="closeMenu">
       <i class="fas fa-times"></i>
     </button>
   </div>
   
-  <button class="menu-item" id="backBtn">
-    <i class="fas fa-arrow-left"></i>
-    Back to Home
+  <button class="menu-item-compact" id="backBtn">
+    <i class="fas fa-home"></i>
+    Home
   </button>
   
-  <button class="menu-item" id="developerBtn">
+  <button class="menu-item-compact" id="developer">
     <i class="fas fa-code"></i>
     Developer
   </button>
   
-  <button class="menu-item" id="tutorialsBtn">
-    <i class="fas fa-graduation-cap"></i>
+  <button class="menu-item-compact" id="tutorials">
+    <i class="fas fa-book"></i>
     Tutorials
   </button>
-  
-  <div class="theme-toggle">
-    <div class="toggle-label">
-      <i class="fas fa-moon"></i>
-      Dark Mode
-    </div>
-    <label class="toggle-switch">
-      <input type="checkbox" id="themeSwitch">
-      <span class="toggle-slider"></span>
-    </label>
-  </div>
 </div>
 
-<!-- Processing Monitor -->
-<div class="processing-monitor" id="processingMonitor">
+<div class="monitor-compact" id="processingMonitor">
   <div class="monitor-header">
-    <h3><i class="fas fa-chart-line"></i> Live Monitor</h3>
-    <button class="close-monitor" id="closeMonitor">
+    <h3><i class="fas fa-chart-line"></i> LIVE MONITOR</h3>
+    <button class="close-monitor-btn" id="closeMonitor">
       <i class="fas fa-times"></i>
     </button>
   </div>
   
-  <div class="stats-grid">
-    <div class="stat-item">
-      <div class="stat-label">Status</div>
+  <div class="stats-grid-compact">
+    <div class="stat-box">
+      <div class="stat-label">STATUS</div>
       <div class="stat-value" id="currentStatus">IDLE</div>
     </div>
-    <div class="stat-item">
-      <div class="stat-label">Shares</div>
+    <div class="stat-box">
+      <div class="stat-label">SHARES</div>
       <div class="stat-value" id="totalShares">0</div>
     </div>
-    <div class="stat-item">
-      <div class="stat-label">Success</div>
+    <div class="stat-box">
+      <div class="stat-label">SUCCESS</div>
       <div class="stat-value" id="successRate">0%</div>
     </div>
-    <div class="stat-item">
-      <div class="stat-label">Time</div>
+    <div class="stat-box">
+      <div class="stat-label">TIME</div>
       <div class="stat-value" id="timeElapsed">0s</div>
     </div>
   </div>
   
-  <div class="progress-container">
-    <div class="progress-label">
-      <span>Progress</span>
+  <div class="progress-compact">
+    <div class="progress-header">
+      <span>PROGRESS</span>
       <span id="progressPercent">0%</span>
     </div>
-    <div class="progress-bar">
+    <div class="progress-bar-compact">
       <div class="progress-fill" id="progressBar"></div>
     </div>
   </div>
   
-  <div class="log-container" id="logContainer"></div>
+  <div class="log-compact" id="logEntries"></div>
 </div>
 
-
-
+<script src="update.js"></script>
 
 </body>
 </html>
