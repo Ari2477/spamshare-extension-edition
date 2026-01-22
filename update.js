@@ -280,22 +280,26 @@ shareBtn[a0_0x1446b4(0xe6)]('click', async () => {
         }
         
     } catch (_0x1a521d) {
-        updateProcessingStatus('ERROR', '#ef4444');
-        updateProgress(100);
-        
-        if (_0x1a521d.name === 'AbortError') {
-            addLogEntry('⏰ Request timeout - Server took too long to respond', 'error');
-            statusEl[_0x46686d(0xc4)] = '⏰ Request timeout';
-        } else {
-            addLogEntry('🔌 Network error - Check your connection', 'error');
-            statusEl[_0x46686d(0xc4)] = _0x46686d(0xc2);
-        }
-        
-        addLogEntry('❌ Process failed', 'error');
-        statusEl[_0x46686d(0xd0)][_0x46686d(0xc6)] = _0x46686d(0xe0);
-        console[_0x46686d(0xe3)](_0x1a521d);
-        
-    } finally {
+         updateProcessingStatus('ERROR', '#ef4444');
+         updateProgress(100);
+    
+    if (_0x1a521d.name === 'AbortError') {
+        addLogEntry('⏰ Request timeout - Server took too long to respond', 'error');
+        if (statusEl) statusEl.textContent = '⏰ Request timeout';
+    } else {
+        addLogEntry('🔌 Network error - Check your connection', 'error');
+        if (statusEl) statusEl.textContent = '❌ Error! Check network or cookie.';
+    }
+    
+    addLogEntry('❌ Process failed', 'error');
+
+    if (statusEl && statusEl.style) {
+        statusEl.style.color = '#fecaca'; 
+    }
+    
+    console.error('Error details:', _0x1a521d);
+
+} finally {
 
         stopTimer();
         shareBtn.disabled = false;
